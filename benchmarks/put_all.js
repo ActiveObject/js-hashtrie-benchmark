@@ -7,6 +7,7 @@ var ht = require('hashtrie');
 var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
+var Trie = require('immutable-trie');
 
 var words = require('./words').words;
 
@@ -43,22 +44,44 @@ var moriPutAll = function(keys) {
     };
 };
 
+var nativePutAll = function(keys) {
+    return function() {
+        var h = {};
+        for (var i = 0, len = keys.length; i < len; ++i)
+            h[keys[i], i];
+    };
+};
+
+var itriePutAll = function(keys) {
+    return function() {
+        var h = Trie.Empty;
+        for (var i = 0, len = keys.length; i < len; ++i)
+            h = h.assoc(keys[i], i);
+    };
+};
+
 
 module.exports = function(sizes) {
     return sizes.reduce(function(b,size) {
         var keys = words(size, 10);
         return b
+            .add('native(' + size+ ')',
+                nativePutAll(keys))
+
+            .add('immutable-trie(' + size+ ')',
+                itriePutAll(keys))
+
             .add('hashtrie(' + size+ ')',
                 hashtriePutAll(keys))
-            
+
             .add('hamt(' + size+ ')',
                 hamtPutAll(keys))
-            
+
             .add('persistent-hash-trie(' + size+ ')',
                 pHashtriePutAll(keys))
-            
+
             .add('mori hash_map(' + size+ ')',
                 moriPutAll(keys));
-            
+
     }, new Benchmark.Suite('Put All'));
 };

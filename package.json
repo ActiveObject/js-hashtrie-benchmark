@@ -16,17 +16,15 @@
         "type": "git",
         "url": "https://github.com/mattbierner/js-hashtrie-benchmark.git"
     },
-    
-      "dependencies": {
+    "dependencies": {
         "benchmark": "1.0.x",
         "pad": "0.0.x",
-        
         "persistent-hash-trie": "0.4.x",
         "hashtrie": "0.2.x",
         "hamt": "0.1.x",
-        "mori": "0.2.x"
+        "mori": "0.2.x",
+        "immutable-trie": "0.2.x"
     },
-    
     "scripts": {
         "benchmark": "node run.js"
     }
