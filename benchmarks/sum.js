@@ -8,6 +8,7 @@ var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
 var Trie = require('immutable-trie');
+var Morearty = require('morearty');
 
 var words = require('./words').words;
 
@@ -81,8 +82,7 @@ var nativeForLoopSum = function(keys) {
         h[keys[i]] = i;
 
     return function() {
-        var sum = 0,
-            keys = Object.keys(h);
+        var sum = 0;
 
         for (var i = 0, l = keys.length; i < l; i++) {
             sum += h[keys[i]];
@@ -105,6 +105,18 @@ var nativeForInLoopSum = function(keys) {
                 sum += h[keys[i]];
             }
         }
+    };
+};
+
+var moreartyMapSum = function(keys) {
+    var add = function(p, c) { return p + c; };
+
+    var h = Morearty.Data.Map;
+    for (var i = 0; i < keys.length; ++i)
+        h = h.assoc(keys[i], i);
+
+    return function() {
+        h.reduce(add, 0);
     };
 };
 
@@ -134,7 +146,10 @@ module.exports = function(sizes) {
                 pHashtrieKeys(keys))
 
             .add('mori hash_map(' + size+ ')',
-                moriKeys(keys));
+                moriKeys(keys))
+
+            .add('morearty Data.Map(' + size+ ')',
+                moreartyMapSum(keys))
 
     }, new Benchmark.Suite('Sum'));
 };

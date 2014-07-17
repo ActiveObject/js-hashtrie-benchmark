@@ -8,6 +8,7 @@ var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
 var Trie = require('immutable-trie');
+var Morearty = require('morearty');
 
 var words = require('./words').words;
 
@@ -98,6 +99,18 @@ var nativeRemoveAll = function(keys, order) {
 };
 
 
+var moreartyMapRemoveAll = function(keys, order) {
+    var h = Morearty.Data.Map;
+    for (var i = 0, len = keys.length; i < len; ++i)
+        h = h.assoc(keys[i], i);
+
+    return function() {
+        var c = h;
+        for (var i = 0, len = order.length; i < len; ++i)
+           c = h.dissoc(keys[order[i]]);
+    };
+};
+
 
 module.exports = function(sizes) {
     return sizes.reduce(function(b,size) {
@@ -120,7 +133,10 @@ module.exports = function(sizes) {
                 pHashtrieRemoveAll(keys, order))
 
             .add('mori hash_map(' + size+ ')',
-                moriRemoveAll(keys, order));
+                moriRemoveAll(keys, order))
+
+            .add('morearty Data.Map(' + size+ ')',
+                moreartyMapRemoveAll(keys, order));
 
     }, new Benchmark.Suite('Remove All'));
 };

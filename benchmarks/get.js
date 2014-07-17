@@ -8,6 +8,7 @@ var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
 var Trie = require('immutable-trie');
+var Morearty = require('morearty');
 
 var words = require('./words').words;
 
@@ -80,6 +81,17 @@ var itrieGet = function(keys) {
     };
 };
 
+var moreartyMapGet = function(keys) {
+    var h = Morearty.Data.Map;
+    for (var i = keys.length - 1; i >= 0; --i)
+        h = h.assoc(keys[i], i);
+
+    return function () {
+        var key = keys[Math.floor(Math.random() * keys.length)];
+        h.get(key);
+    };
+};
+
 
 module.exports = function(sizes) {
     return sizes.reduce(function(b,size) {
@@ -101,7 +113,10 @@ module.exports = function(sizes) {
                 pHashtrieGet(keys))
 
             .add('mori hash_map(' + size+ ')',
-                moriGet(keys));
+                moriGet(keys))
+
+            .add('morearty Data.Map(' + size+ ')',
+                moreartyMapGet(keys))
 
     }, new Benchmark.Suite('Get nth'));
 };
