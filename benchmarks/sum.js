@@ -72,8 +72,8 @@ var nativeForInLoopSum = function (h, keys) {
     for (var key in h) {
       if (h.hasOwnProperty(key)) {
         sum += h[keys[i]];
+        i++;
       }
-      i++;
     }
   };
 };
