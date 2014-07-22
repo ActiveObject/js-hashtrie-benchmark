@@ -54,25 +54,24 @@ var mori = function (h) {
   };
 };
 
-var nativeForLoopSum = function (h, keys) {
+var nativeForLoopSum = function (h) {
   return function () {
     var sum = 0;
 
-    for (var i = 0, l = keys.length; i < l; i++) {
+    var keys = Object.keys(h);
+    for (var i = 0, l = h.length; i < l; i++) {
       sum += h[keys[i]];
     }
   };
 };
 
-var nativeForInLoopSum = function (h, keys) {
+var nativeForInLoopSum = function (h) {
   return function () {
     var sum = 0;
 
-    var i = 0;
     for (var key in h) {
       if (h.hasOwnProperty(key)) {
-        sum += h[keys[i]];
-        i++;
+        sum += h[key];
       }
     }
   };
