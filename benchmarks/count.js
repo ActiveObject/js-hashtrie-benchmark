@@ -7,7 +7,7 @@ var ht = require('hashtrie');
 var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
-var Trie = require('immutable-trie');
+var Map = require('immutable-map');
 var Morearty = require('morearty');
 
 var words = require('./words').words;
@@ -65,15 +65,16 @@ var nativeCount = function(keys) {
     };
 };
 
-var itrieCount = function(keys) {
-    var h = Trie.Empty;
+var imMapCount = function(keys) {
+    var h = Map.Empty;
     for (var i = keys.length - 1; i >= 0; --i)
-        h = h.assoc(keys[i], i);
+        h = h.set(keys[i], i);
 
     return function() {
-        h.count();
+        h.size;
     };
 };
+
 
 var moreartyMapCount = function(keys) {
     var h = Morearty.Data.Map;
@@ -86,16 +87,12 @@ var moreartyMapCount = function(keys) {
 };
 
 
-
 module.exports = function(sizes) {
     return sizes.reduce(function(b,size) {
         var keys = words(size, 10);
         return b
             .add('native(' + size+ ')',
                 nativeCount(keys))
-
-            .add('immutable-trie(' + size+ ')',
-                itrieCount(keys))
 
             .add('hashtrie(' + size+ ')',
                 hashtrieCount(keys))
@@ -108,6 +105,9 @@ module.exports = function(sizes) {
 
             .add('mori hash_map(' + size+ ')',
                 moriCount(keys))
+
+            .add('immutable-map(' + size+ ')',
+                imMapCount(keys))
 
             .add('morearty Data.Map(' + size+ ')',
                 moreartyMapCount(keys))

@@ -7,7 +7,7 @@ var ht = require('hashtrie');
 var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
-var Trie = require('immutable-trie');
+var Map = require('immutable-map');
 var Morearty = require('morearty');
 
 var words = require('./words').words;
@@ -62,17 +62,17 @@ var moriKeys = function(keys) {
     };
 };
 
-var itrieKeys = function(keys) {
-    var add = function(p, c) { return p + c; };
+// var itrieKeys = function(keys) {
+//     var add = function(p, c) { return p + c; };
 
-    var h = Trie.Empty;
-    for (var i = 0; i < keys.length; ++i)
-        h = h.assoc(keys[i], i);
+//     var h = Trie.Empty;
+//     for (var i = 0; i < keys.length; ++i)
+//         h = h.assoc(keys[i], i);
 
-    return function() {
-        h.reduce(add, 0);
-    };
-};
+//     return function() {
+//         h.reduce(add, 0);
+//     };
+// };
 
 var nativeForLoopSum = function(keys) {
     var add = function(p, c) { return p + c; };
@@ -108,6 +108,18 @@ var nativeForInLoopSum = function(keys) {
     };
 };
 
+var imMapSum = function(keys) {
+    var add = function(p, c) { return p + c; };
+
+    var h = Map.Empty;
+    for (var i = 0; i < keys.length; ++i)
+        h = h.set(keys[i], i);
+
+    return function() {
+        h.reduce(add, 0);
+    };
+};
+
 var moreartyMapSum = function(keys) {
     var add = function(p, c) { return p + c; };
 
@@ -121,8 +133,6 @@ var moreartyMapSum = function(keys) {
 };
 
 
-
-
 module.exports = function(sizes) {
     return sizes.reduce(function(b,size) {
         var keys = words(size, 10);
@@ -132,9 +142,6 @@ module.exports = function(sizes) {
 
             .add('native-for-in-loop(' + size+ ')',
                 nativeForInLoopSum(keys))
-
-            .add('immutable-trie(' + size+ ')',
-                itrieKeys(keys))
 
             .add('hashtrie(' + size+ ')',
                 hashtrieKeys(keys))
@@ -147,6 +154,9 @@ module.exports = function(sizes) {
 
             .add('mori hash_map(' + size+ ')',
                 moriKeys(keys))
+
+            .add('immutable-map(' + size+ ')',
+                imMapSum(keys))
 
             .add('morearty Data.Map(' + size+ ')',
                 moreartyMapSum(keys))

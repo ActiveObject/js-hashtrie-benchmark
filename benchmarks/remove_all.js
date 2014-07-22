@@ -7,7 +7,7 @@ var ht = require('hashtrie');
 var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
-var Trie = require('immutable-trie');
+var Map = require('immutable-map');
 var Morearty = require('morearty');
 
 var words = require('./words').words;
@@ -73,18 +73,6 @@ var moriRemoveAll = function(keys, order) {
 };
 
 
-var itrieRemoveAll = function(keys, order) {
-    var h = Trie.Empty;
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = h.assoc(keys[i], i);
-
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           c = h.without(keys[order[i]]);
-    };
-};
-
 
 var nativeRemoveAll = function(keys, order) {
     var h = {};
@@ -98,6 +86,18 @@ var nativeRemoveAll = function(keys, order) {
     };
 };
 
+
+var imMapRemoveAll = function(keys, order) {
+    var h = Map.Empty;
+    for (var i = 0, len = keys.length; i < len; ++i)
+        h = h.set(keys[i], i);
+
+    return function() {
+        var c = h;
+        for (var i = 0, len = order.length; i < len; ++i)
+           c = h.delete(keys[order[i]]);
+    };
+};
 
 var moreartyMapRemoveAll = function(keys, order) {
     var h = Morearty.Data.Map;
@@ -120,9 +120,6 @@ module.exports = function(sizes) {
             .add('native(' + size+ ')',
                 nativeRemoveAll(keys, order))
 
-            .add('immutable-trie(' + size+ ')',
-                itrieRemoveAll(keys, order))
-
             .add('hashtrie(' + size+ ')',
                 hashtrieRemoveAll(keys, order))
 
@@ -134,6 +131,9 @@ module.exports = function(sizes) {
 
             .add('mori hash_map(' + size+ ')',
                 moriRemoveAll(keys, order))
+
+            .add('immutable-map(' + size+ ')',
+                imMapRemoveAll(keys, order))
 
             .add('morearty Data.Map(' + size+ ')',
                 moreartyMapRemoveAll(keys, order));
