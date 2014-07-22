@@ -3,118 +3,77 @@
  */
 var Benchmark = require('benchmark');
 
-var ht = require('hashtrie');
-var hamt = require('hamt');
-var p = require('persistent-hash-trie');
-var mori = require('mori');
-var Map = require('immutable-map');
-var Morearty = require('morearty');
-
-var words = require('./words').words;
-
-
-
-var hashtriePut = function(keys) {
-    var h = ht.empty;
-    for (var i = keys.length - 1; i; --i)
-        h = ht.set(keys[i], i, h);
-
-    var key = keys[0];
-    return function() {
-        ht.set(key, 0, h);
-    };
+var Participants = {
+  ht: require('hashtrie'),
+  hamt: require('hamt'),
+  p: require('persistent-hash-trie'),
+  mori: require('mori'),
+  Map: require('immutable-map'),
+  Morearty: require('morearty')
 };
 
-var hamtPut = function(keys) {
-    var h = hamt.empty;
-    for (var i = keys.length - 1; i; --i)
-        h = hamt.set(keys[i], i, h);
+var data = require('./data').data;
 
-    var key = keys[0];
-    return function() {
-        hamt.set(key, 0, h);
-    };
+var ht = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    Participants.ht.set(key, 0, h);
+  };
 };
 
-var pHashtriePut = function(keys) {
-    var h = p.Trie();
-    for (var i = keys.length - 1; i; --i)
-        h = p.assoc(h, keys[i], i);
-
-    var key = keys[0];
-    return function() {
-        p.assoc(h, key, 0);
-    };
+var hamt = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    Participants.hamt.set(key, 0, h);
+  };
 };
 
-var moriPut = function(keys) {
-    var h = mori.hash_map();
-    for (var i = keys.length - 1; i; --i)
-        h = mori.assoc(h, keys[i], i);
-
-    var key = keys[0];
-    return function() {
-        mori.assoc(h, key, 0);
-    };
+var pht = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    Participants.p.assoc(h, key, 0);
+  };
 };
 
-var nativeObjectPut = function (keys) {
-    var h = {};
-    for (var i = keys.length - 1; i; --i)
-        h[keys[i]] = i;
-
-    var key = keys[0];
-    return function () {
-        h[key] = 0;
-    };
+var mori = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    Participants.mori.assoc(h, key, 0);
+  };
 };
 
-var imMapPut = function(keys) {
-    var h = Map.Empty;
-    for (var i = keys.length - 1; i; --i)
-        h = h.set(keys[i], i);
-
-    var key = keys[0];
-    return function() {
-        h.set(key, 0);
-    };
+var native = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    h[key] = 0;
+  };
 };
 
-var moreartyMapPut = function(keys) {
-    var h = Morearty.Data.Map;
-    for (var i = keys.length - 1; i; --i)
-        h = h.assoc(keys[i], i);
-
-    var key = keys[0];
-    return function() {
-        h.assoc(key, 0);
-    };
+var im = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    h.set(key, 0);
+  };
 };
 
-module.exports = function(sizes) {
-    return sizes.reduce(function(b,size) {
-        var keys = words(size, 10);
-        return b
-            .add('native(' + size + ')',
-                nativeObjectPut(keys))
+var morearty = function (h, keys) {
+  var key = keys[0];
+  return function () {
+    h.assoc(key, 0);
+  };
+};
 
-            .add('hashtrie(' + size+ ')',
-                hashtriePut(keys))
+module.exports = function (sizes) {
+  return sizes.reduce(function (b, size) {
+    var keys = data[size].keys;
+    return b
+      .add('native(' + size + ')', native(data[size]['native'], keys))
+      .add('ht(' + size + ')', ht(data[size]['ht'], keys))
+      .add('hamt(' + size + ')', hamt(data[size]['hamt'], keys))
+      .add('persistent-hash-trie(' + size + ')', pht(data[size]['pht'], keys))
+      .add('mori hash_map(' + size + ')', mori(data[size]['mori'], keys))
+      .add('immutable-map(' + size + ')', im(data[size]['im'], keys))
+      .add('morearty Data.Map(' + size + ')', morearty(data[size]['morearty'], keys));
 
-            .add('hamt(' + size+ ')',
-                hamtPut(keys))
-
-            .add('persistent-hash-trie(' + size+ ')',
-                pHashtriePut(keys))
-
-            .add('mori hash_map(' + size+ ')',
-                moriPut(keys))
-
-            .add('immutable-map(' + size + ')',
-                imMapPut(keys))
-
-            .add('morearty Data.Map(' + size+ ')',
-                moreartyMapPut(keys))
-
-    }, new Benchmark.Suite('put nth'));
+  }, new Benchmark.Suite('put nth'));
 };

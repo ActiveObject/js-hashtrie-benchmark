@@ -3,114 +3,70 @@
  */
 var Benchmark = require('benchmark');
 
-var ht = require('hashtrie');
-var hamt = require('hamt');
-var p = require('persistent-hash-trie');
-var mori = require('mori');
-var Map = require('immutable-map');
-var Morearty = require('morearty');
-
-var words = require('./words').words;
-
-
-
-var hashtrieCount = function(keys) {
-    var h = ht.empty;
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = ht.set(keys[i], i, h);
-
-    return function() {
-        ht.count(h);
-    };
+var Participants = {
+  ht: require('hashtrie'),
+  hamt: require('hamt'),
+  p: require('persistent-hash-trie'),
+  mori: require('mori'),
+  Map: require('immutable-map'),
+  Morearty: require('morearty')
 };
 
-var hamtCount = function(keys) {
-    var h = hamt.empty;
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = hamt.set(keys[i], i, h);
+var data = require('./data').data;
 
-    return function() {
-        hamt.count(h);
-    };
+var ht = function (h) {
+  return function () {
+    return Participants.ht.count(h);
+  };
+};
+
+var hamt = function (h) {
+  return function () {
+    return Participants.hamt.count(h);
+  };
 };
 
 
-var pHashtrieCount = function(keys) {
-    var h = p.Trie();
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = p.assoc(h, keys[i], i);
-
-    return function() {
-        p.keys(h).length;
-    };
+var pht = function (h) {
+  return function () {
+    return Participants.p.keys(h).length;
+  };
 };
 
-var moriCount = function(keys) {
-    var h = mori.hash_map();
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = mori.assoc(h, keys[i], i);
-
-    return function() {
-        mori.count(h);
-    };
+var mori = function (h) {
+  return function () {
+    return Participants.mori.count(h);
+  };
 };
 
-var nativeCount = function(keys) {
-    var h = {};
-    for (var i = keys.length - 1; i >= 0; --i)
-        h[keys[i]] = i;
-
-    return function() {
-        Object.keys(h).length;
-    };
+var native = function (h) {
+  return function () {
+    return Object.keys(h).length;
+  };
 };
 
-var imMapCount = function(keys) {
-    var h = Map.Empty;
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = h.set(keys[i], i);
-
-    return function() {
-        h.size;
-    };
+var im = function (h) {
+  return function () {
+    return h.size;
+  };
 };
 
 
-var moreartyMapCount = function(keys) {
-    var h = Morearty.Data.Map;
-    for (var i = keys.length - 1; i >= 0; --i)
-        h = h.assoc(keys[i], i);
-
-    return function() {
-        h.size();
-    };
+var morearty = function (h) {
+  return function () {
+    h.size();
+  };
 };
 
-
-module.exports = function(sizes) {
-    return sizes.reduce(function(b,size) {
-        var keys = words(size, 10);
-        return b
-            .add('native(' + size+ ')',
-                nativeCount(keys))
-
-            .add('hashtrie(' + size+ ')',
-                hashtrieCount(keys))
-
-            .add('hamt(' + size+ ')',
-                hamtCount(keys))
-
-            .add('persistent-hash-trie(' + size+ ')',
-                pHashtrieCount(keys))
-
-            .add('mori hash_map(' + size+ ')',
-                moriCount(keys))
-
-            .add('immutable-map(' + size+ ')',
-                imMapCount(keys))
-
-            .add('morearty Data.Map(' + size+ ')',
-                moreartyMapCount(keys))
-
-    }, new Benchmark.Suite('Count'));
+module.exports = function (sizes) {
+  return sizes.reduce(function (b, size) {
+    return b
+      .add('native(' + size + ')', native(data[size]['native']))
+      .add('ht(' + size + ')', ht(data[size]['ht']))
+      .add('hamt(' + size + ')', hamt(data[size]['hamt']))
+      .add('persistent-hash-trie(' + size + ')', pht(data[size]['pht']))
+      .add('mori hash_map(' + size + ')', mori(data[size]['mori']))
+      .add('immutable-map(' + size + ')', im(data[size]['im']))
+      .add('morearty Data.Map(' + size + ')', morearty(data[size]['morearty']));
+  }, new Benchmark.Suite('Count'));
 };

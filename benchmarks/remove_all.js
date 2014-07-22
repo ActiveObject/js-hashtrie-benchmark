@@ -3,140 +3,97 @@
  */
 var Benchmark = require('benchmark');
 
-var ht = require('hashtrie');
-var hamt = require('hamt');
-var p = require('persistent-hash-trie');
-var mori = require('mori');
-var Map = require('immutable-map');
-var Morearty = require('morearty');
-
-var words = require('./words').words;
-
-var range = function(start, end) {
-    var indicies = [], out = [];
-    for (var i = start; i < end; ++i)
-        indicies.push(i);
-    while (indicies.length) {
-        var index = Math.floor(Math.random() * indicies.length);
-        out.push(indicies[index]);
-        indicies.splice(index, 1);
-    }
-    return out;
+var Participants = {
+  ht: require('hashtrie'),
+  hamt: require('hamt'),
+  p: require('persistent-hash-trie'),
+  mori: require('mori'),
+  Map: require('immutable-map'),
+  Morearty: require('morearty')
 };
 
-var hashtrieRemoveAll = function(keys, order) {
-    var h = ht.empty;
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = ht.set(keys[i], i, h);
+var data = require('./data').data;
 
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-            c = ht.remove(keys[order[i]], c);
-    };
+var range = function (start, end) {
+  var indicies = [], out = [];
+  for (var i = start; i < end; ++i)
+    indicies.push(i);
+  while (indicies.length) {
+    var index = Math.floor(Math.random() * indicies.length);
+    out.push(indicies[index]);
+    indicies.splice(index, 1);
+  }
+  return out;
 };
 
-var hamtRemoveAll = function(keys, order) {
-    var h = hamt.empty;
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = hamt.set(keys[i], i, h);
-
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-            c = hamt.remove(keys[order[i]], c);
-    };
+var ht = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = Participants.ht.remove(keys[order[i]], c);
+  };
 };
 
-var pHashtrieRemoveAll = function(keys, order) {
-    var h = p.Trie();
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = p.assoc(h, keys[i], i);
-
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           c = p.dissoc(c, keys[order[i]]);
-    };
+var hamt = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = Participants.hamt.remove(keys[order[i]], c);
+  };
 };
 
-var moriRemoveAll = function(keys, order) {
-    var h = mori.hash_map();
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = mori.assoc(h, keys[i], i);
+var pht = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = Participants.p.dissoc(c, keys[order[i]]);
+  };
+};
 
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           c = mori.dissoc(c, keys[order[i]]);
-    };
+var mori = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = Participants.mori.dissoc(c, keys[order[i]]);
+  };
+};
+
+var native = function (h, keys, order) {
+  return function () {
+    for (var i = 0, len = order.length; i < len; ++i)
+      delete h[keys[order[i]]];
+  };
 };
 
 
-
-var nativeRemoveAll = function(keys, order) {
-    var h = {};
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h[keys[i]] = i;
-
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           delete c[keys[order[i]]];
-    };
+var im = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = h.delete(keys[order[i]]);
+  };
 };
 
-
-var imMapRemoveAll = function(keys, order) {
-    var h = Map.Empty;
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = h.set(keys[i], i);
-
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           c = h.delete(keys[order[i]]);
-    };
+var morearty = function (h, keys, order) {
+  return function () {
+    var c = h;
+    for (var i = 0, len = order.length; i < len; ++i)
+      c = h.dissoc(keys[order[i]]);
+  };
 };
 
-var moreartyMapRemoveAll = function(keys, order) {
-    var h = Morearty.Data.Map;
-    for (var i = 0, len = keys.length; i < len; ++i)
-        h = h.assoc(keys[i], i);
+module.exports = function (sizes) {
+  return sizes.reduce(function (b, size) {
+    var keys = data[size].keys;
+    var order = range(0, size);
+    return b
+      .add('native(' + size + ')', native(data[size]['native'], keys, order))
+      .add('ht(' + size + ')', ht(data[size]['ht'], keys, order))
+      .add('hamt(' + size + ')', hamt(data[size]['hamt'], keys, order))
+      .add('persistent-hash-trie(' + size + ')', pht(data[size]['pht'], keys, order))
+      .add('mori hash_map(' + size + ')', mori(data[size]['mori'], keys, order))
+      .add('immutable-map(' + size + ')', im(data[size]['im'], keys, order))
+      .add('morearty Data.Map(' + size + ')', morearty(data[size]['morearty'], keys, order));
 
-    return function() {
-        var c = h;
-        for (var i = 0, len = order.length; i < len; ++i)
-           c = h.dissoc(keys[order[i]]);
-    };
-};
-
-
-module.exports = function(sizes) {
-    return sizes.reduce(function(b,size) {
-        var keys = words(size, 10),
-            order = range(0, size);
-        return b
-            .add('native(' + size+ ')',
-                nativeRemoveAll(keys, order))
-
-            .add('hashtrie(' + size+ ')',
-                hashtrieRemoveAll(keys, order))
-
-            .add('hamt(' + size+ ')',
-                hamtRemoveAll(keys, order))
-
-            .add('persistent-hash-trie(' + size+ ')',
-                pHashtrieRemoveAll(keys, order))
-
-            .add('mori hash_map(' + size+ ')',
-                moriRemoveAll(keys, order))
-
-            .add('immutable-map(' + size+ ')',
-                imMapRemoveAll(keys, order))
-
-            .add('morearty Data.Map(' + size+ ')',
-                moreartyMapRemoveAll(keys, order));
-
-    }, new Benchmark.Suite('Remove All'));
+  }, new Benchmark.Suite('Remove All'));
 };

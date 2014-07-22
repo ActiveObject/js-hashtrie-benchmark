@@ -6,7 +6,7 @@ Benchmarks 6 Persistent Javascript hashtrie implementations:
 * [persistent-hash-trie][persistent] - 0.4.x
 * [mori][mori] - 0.2.x
 * [immutable-map][immutable-map] - 0.1.1
-* [morearty][morearty] - 0.1.6
+* [morearty][morearty] - 0.1.8
 
 ### Usage
 
@@ -14,7 +14,6 @@ Benchmarks 6 Persistent Javascript hashtrie implementations:
 $ npm install
 $ npm run benchmark
 ```
-
 
 ### Benchmarks
 * Get entry in map of size N.
@@ -51,14 +50,13 @@ the opposite of puts and single removes, I believe this is related to
 a [bug in the library](https://github.com/hughfdjackson/persistent-hash-trie/issues/24).
 
 
-
 ```
 hashtrie - 0.2.2
 hamt - 0.1.4
 mori - 0.2.6
 persistent-hash-trie - 0.4.2
 immutable-map - 0.1.1
-morearty - 0.1.6
+morearty - 0.1.8
 
 Get nth
 native(10)                    :     12559361.34 +/- 1.97% op/s
@@ -332,9 +330,6 @@ mori hash_map(10000)          :          250.91 +/- 0.50% op/s
 immutable-map(10000)          :         4072.13 +/- 1.05% op/s
 morearty Data.Map(10000)      :          313.67 +/- 0.59% op/s
 ```
-
-
-
 
 [hashtrie]: https://github.com/mattbierner/hashtrie
 [hamt]: https://github.com/mattbierner/hamt
