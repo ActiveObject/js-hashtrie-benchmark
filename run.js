@@ -11,36 +11,35 @@ var log = function () {
 
 var prepare = require('./benchmarks/data').prepare;
 var sizes = [10, 100, 1000, 10000, 100000];
-prepare(sizes);
 
-require('./benchmarks/get')(sizes)
+require('./benchmarks/get')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/put')(sizes)
+require('./benchmarks/put')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/put_all')(sizes)
+require('./benchmarks/put_all')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/remove')(sizes)
+require('./benchmarks/remove')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/remove_all')(sizes)
+require('./benchmarks/remove_all')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/count')(sizes)
+require('./benchmarks/count')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/sum')(sizes)
+require('./benchmarks/sum')(prepare(sizes))
   .on('complete', log)
   .run(true);
 
-require('./benchmarks/keys')(sizes)
+require('./benchmarks/keys')(prepare(sizes))
   .on('complete', log)
   .run(true);

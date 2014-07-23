@@ -8,8 +8,6 @@ var Morearty = require('morearty');
 var words = require('./words').words;
 
 exports.prepare = function (sizes) {
-  var data = {};
-
   var prepareHashtrie = function (keys) {
     var map = ht.empty;
     for (var i = keys.length - 1; i >= 0; --i) map = ht.set(keys[i], i, map);
@@ -52,20 +50,21 @@ exports.prepare = function (sizes) {
     return map;
   };
 
-  sizes.forEach(function (size) {
+  return sizes.map(function (size) {
     var keys = words(size, 10);
-    var node = {};
-    node.ht = prepareHashtrie(keys);
-    node.hamt = prepareHamt(keys);
-    node.pht = preparePersistentHashTrie(keys);
-    node.mori = prepareMori(keys);
-    node.native = prepareNative(keys);
-    node.im = prepareImmutableMap(keys);
-    node.morearty = prepareMorearty(keys);
-    node.keys = keys;
 
-    data[size] = node;
+    return {
+      size: size,
+      keys: keys,
+      items: {
+        ht: prepareHashtrie(keys),
+        hamt: prepareHamt(keys),
+        pht: preparePersistentHashTrie(keys),
+        mori: prepareMori(keys),
+        native: prepareNative(keys),
+        im: prepareImmutableMap(keys),
+        morearty: prepareMorearty(keys)
+      }
+    };
   });
-
-  exports.data = data;
 };

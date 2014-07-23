@@ -12,8 +12,6 @@ var Participants = {
   Morearty: require('morearty')
 };
 
-var data = require('./data').data;
-
 var ht = function (h) {
   return function () {
     Participants.ht.keys(h);
@@ -57,16 +55,16 @@ var morearty = function (h) {
   };
 };
 
-module.exports = function (sizes) {
-  return sizes.reduce(function (b, size) {
+module.exports = function (datasets) {
+  return datasets.reduce(function (b, dataset) {
     return b
-      .add('native(' + size + ')', native(data[size]['native']))
-      .add('ht(' + size + ')', ht(data[size]['ht']))
-      .add('hamt(' + size + ')', hamt(data[size]['hamt']))
-      .add('persistent-hash-trie(' + size + ')', pht(data[size]['pht']))
-      .add('mori hash_map(' + size + ')', mori(data[size]['mori']))
-      .add('immutable-map(' + size + ')', im(data[size]['im']))
-      .add('morearty Data.Map(' + size + ')', morearty(data[size]['morearty']));
+      .add('native(' + dataset.size + ')', native(dataset.items.native))
+      .add('ht(' + dataset.size + ')', ht(dataset.items.ht))
+      .add('hamt(' + dataset.size + ')', hamt(dataset.items.hamt))
+      .add('persistent-hash-trie(' + dataset.size + ')', pht(dataset.items.pht))
+      .add('mori hash_map(' + dataset.size + ')', mori(dataset.items.mori))
+      .add('immutable-map(' + dataset.size + ')', im(dataset.items.im))
+      .add('morearty Data.Map(' + dataset.size + ')', morearty(dataset.items.morearty));
 
   }, new Benchmark.Suite('Keys'));
 };

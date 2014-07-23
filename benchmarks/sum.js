@@ -12,8 +12,6 @@ var Participants = {
   Morearty: require('morearty')
 };
 
-var data = require('./data').data;
-
 var ht = function (h) {
   var add = function (p, c) {
     return p + c.value;
@@ -98,18 +96,18 @@ var morearty = function (h) {
 };
 
 
-module.exports = function (sizes) {
-  return sizes.reduce(function (b, size) {
-    var keys = data[size].keys;
+module.exports = function (datasets) {
+  return datasets.reduce(function (b, dataset) {
+    var keys = dataset.keys;
     return b
-      .add('native-for-loop(' + size + ')', nativeForLoopSum(data[size]['native'], keys))
-      .add('native-for-in-loop(' + size + ')', nativeForInLoopSum(data[size]['native'], keys))
-      .add('ht(' + size + ')', ht(data[size]['ht'], keys))
-      .add('hamt(' + size + ')', hamt(data[size]['hamt']))
-      .add('persistent-hash-trie(' + size + ')', pht(data[size]['pht'], keys))
-      .add('mori hash_map(' + size + ')', mori(data[size]['mori'], keys))
-      .add('immutable-map(' + size + ')', im(data[size]['im'], keys))
-      .add('morearty Data.Map(' + size + ')', morearty(data[size]['morearty'], keys));
+      .add('native-for-loop(' + dataset.size + ')', nativeForLoopSum(dataset.items.native, keys))
+      .add('native-for-in-loop(' + dataset.size + ')', nativeForInLoopSum(dataset.items.native, keys))
+      .add('ht(' + dataset.size + ')', ht(dataset.items.ht, keys))
+      .add('hamt(' + dataset.size + ')', hamt(dataset.items.hamt))
+      .add('persistent-hash-trie(' + dataset.size + ')', pht(dataset.items.pht, keys))
+      .add('mori hash_map(' + dataset.size + ')', mori(dataset.items.mori, keys))
+      .add('immutable-map(' + dataset.size + ')', im(dataset.items.im, keys))
+      .add('morearty Data.Map(' + dataset.size + ')', morearty(dataset.items.morearty, keys));
 
   }, new Benchmark.Suite('Sum'));
 };
