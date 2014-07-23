@@ -21,7 +21,7 @@
     "hamt": "0.1.x",
     "hashtrie": "0.2.x",
     "immutable-map": "^0.1.1",
-    "morearty": "^0.1.6",
+    "morearty": "^0.1.8",
     "mori": "0.2.x",
     "pad": "0.0.x",
     "persistent-hash-trie": "0.4.x"

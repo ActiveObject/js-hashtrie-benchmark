@@ -3,7 +3,7 @@ var hamt = require('hamt');
 var p = require('persistent-hash-trie');
 var mori = require('mori');
 var Map = require('immutable-map');
-var Morearty = require('../lib/morearty-0.1.7.min.js');
+var Morearty = require('morearty');
 
 var words = require('./words').words;
 
