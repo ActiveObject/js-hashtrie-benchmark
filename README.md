@@ -59,276 +59,312 @@ immutable-map - 0.1.1
 morearty - 0.1.8
 
 Get nth
-native(10)                    :     12559361.34 +/- 1.97% op/s
-hashtrie(10)                  :      9804168.41 +/- 0.91% op/s
-hamt(10)                      :      9001004.66 +/- 1.10% op/s
-persistent-hash-trie(10)      :      5035283.41 +/- 1.21% op/s
-mori hash_map(10)             :      1675178.41 +/- 1.10% op/s
-immutable-map(10)             :      7856521.66 +/- 0.87% op/s
-morearty Data.Map(10)         :      5878084.37 +/- 0.70% op/s
-native(100)                   :     15727318.48 +/- 0.58% op/s
-hashtrie(100)                 :      8409499.82 +/- 1.01% op/s
-hamt(100)                     :      7888233.20 +/- 0.89% op/s
-persistent-hash-trie(100)     :      2632415.80 +/- 1.18% op/s
-mori hash_map(100)            :      1778616.16 +/- 2.13% op/s
-immutable-map(100)            :      6858546.30 +/- 0.48% op/s
-morearty Data.Map(100)        :      5085110.31 +/- 1.78% op/s
-native(1000)                  :     18012068.31 +/- 0.90% op/s
-hashtrie(1000)                :      7597091.50 +/- 0.96% op/s
-hamt(1000)                    :      6794706.11 +/- 0.90% op/s
-persistent-hash-trie(1000)    :      1577018.59 +/- 1.98% op/s
-mori hash_map(1000)           :       847670.67 +/- 2.75% op/s
-immutable-map(1000)           :      5671658.49 +/- 1.68% op/s
-morearty Data.Map(1000)       :      3968091.65 +/- 0.68% op/s
-native(10000)                 :     17729313.63 +/- 0.49% op/s
-hashtrie(10000)               :      4922049.28 +/- 1.58% op/s
-hamt(10000)                   :      5598274.09 +/- 1.06% op/s
-persistent-hash-trie(10000)   :      1108917.16 +/- 1.63% op/s
-mori hash_map(10000)          :       716020.76 +/- 2.61% op/s
-immutable-map(10000)          :      4511777.68 +/- 0.64% op/s
-morearty Data.Map(10000)      :      2929237.30 +/- 0.89% op/s
-native(100000)                :      4390036.93 +/- 0.34% op/s
-hashtrie(100000)              :      1468281.61 +/- 0.61% op/s
-hamt(100000)                  :      1547672.43 +/- 0.41% op/s
-persistent-hash-trie(100000)  :       904355.64 +/- 0.74% op/s
-mori hash_map(100000)         :       469049.85 +/- 4.15% op/s
-immutable-map(100000)         :      1409221.06 +/- 0.42% op/s
-morearty Data.Map(100000)     :      1214325.78 +/- 0.44% op/s
+native(10)                    :     14444599.64 +/- 3.50% op/s
+ht(10)                        :     10304515.46 +/- 2.95% op/s
+hamt(10)                      :     10278643.41 +/- 3.19% op/s
+persistent-hash-trie(10)      :      7416061.92 +/- 3.40% op/s
+mori hash_map(10)             :      1597847.23 +/- 4.19% op/s
+immutable-map(10)             :      8826683.74 +/- 3.07% op/s
+morearty Data.Map(10)         :      7712084.73 +/- 3.29% op/s
+native(100)                   :     15483016.71 +/- 3.22% op/s
+ht(100)                       :      9164403.36 +/- 3.71% op/s
+hamt(100)                     :      9147983.95 +/- 3.60% op/s
+persistent-hash-trie(100)     :      3178772.96 +/- 3.67% op/s
+mori hash_map(100)            :      1668086.36 +/- 3.63% op/s
+immutable-map(100)            :      7217657.61 +/- 3.73% op/s
+morearty Data.Map(100)        :      5645168.84 +/- 3.80% op/s
+native(1000)                  :     18344343.66 +/- 3.35% op/s
+ht(1000)                      :      7851852.79 +/- 3.76% op/s
+hamt(1000)                    :      8006655.95 +/- 3.29% op/s
+persistent-hash-trie(1000)    :      1783685.43 +/- 3.34% op/s
+mori hash_map(1000)           :       845158.10 +/- 4.43% op/s
+immutable-map(1000)           :      6378186.31 +/- 3.81% op/s
+morearty Data.Map(1000)       :      5277747.93 +/- 3.81% op/s
+native(10000)                 :     17515182.64 +/- 3.43% op/s
+ht(10000)                     :      5694192.32 +/- 3.40% op/s
+hamt(10000)                   :      6275027.45 +/- 3.40% op/s
+persistent-hash-trie(10000)   :      1319588.84 +/- 3.88% op/s
+mori hash_map(10000)          :       700744.95 +/- 5.11% op/s
+immutable-map(10000)          :      4930714.64 +/- 3.88% op/s
+morearty Data.Map(10000)      :      4103624.15 +/- 4.63% op/s
+native(100000)                :      6332721.72 +/- 4.82% op/s
+ht(100000)                    :      1719142.39 +/- 4.22% op/s
+hamt(100000)                  :      1913944.79 +/- 4.08% op/s
+persistent-hash-trie(100000)  :      1025202.66 +/- 3.78% op/s
+mori hash_map(100000)         :       489152.80 +/- 6.26% op/s
+immutable-map(100000)         :      1626174.89 +/- 3.86% op/s
+morearty Data.Map(100000)     :      1542889.41 +/- 4.27% op/s
 
 
 put nth
-native(10)                    :     73542566.91 +/- 2.00% op/s
-hashtrie(10)                  :      3189295.43 +/- 18.01% op/s
-hamt(10)                      :      2779852.90 +/- 0.63% op/s
-persistent-hash-trie(10)      :       363691.63 +/- 0.59% op/s
-mori hash_map(10)             :      1204523.00 +/- 0.82% op/s
-immutable-map(10)             :      1911833.30 +/- 0.62% op/s
-morearty Data.Map(10)         :      2805605.69 +/- 0.54% op/s
-native(100)                   :      8575470.14 +/- 0.52% op/s
-hashtrie(100)                 :      1745891.64 +/- 0.51% op/s
-hamt(100)                     :      2027822.50 +/- 0.48% op/s
-persistent-hash-trie(100)     :       116831.33 +/- 0.58% op/s
-mori hash_map(100)            :      1119565.77 +/- 0.52% op/s
-immutable-map(100)            :      1303387.88 +/- 0.59% op/s
-morearty Data.Map(100)        :      1218064.63 +/- 0.57% op/s
-native(1000)                  :      9979046.89 +/- 0.71% op/s
-hashtrie(1000)                :      1892888.58 +/- 0.54% op/s
-hamt(1000)                    :      2134480.94 +/- 0.48% op/s
-persistent-hash-trie(1000)    :        81912.59 +/- 0.52% op/s
-mori hash_map(1000)           :       921860.83 +/- 0.64% op/s
-immutable-map(1000)           :      1208816.12 +/- 0.54% op/s
-morearty Data.Map(1000)       :      1304467.00 +/- 0.46% op/s
-native(10000)                 :      9490635.80 +/- 0.56% op/s
-hashtrie(10000)               :      1071433.25 +/- 0.59% op/s
-hamt(10000)                   :      1156463.00 +/- 0.43% op/s
-persistent-hash-trie(10000)   :        70958.18 +/- 0.66% op/s
-mori hash_map(10000)          :       825909.69 +/- 0.51% op/s
-immutable-map(10000)          :       755291.28 +/- 2.74% op/s
-morearty Data.Map(10000)      :       731381.74 +/- 0.71% op/s
-native(100000)                :      9972661.24 +/- 0.55% op/s
-hashtrie(100000)              :       985971.20 +/- 0.51% op/s
-hamt(100000)                  :      1061909.61 +/- 10.15% op/s
-persistent-hash-trie(100000)  :        30143.10 +/- 0.72% op/s
-mori hash_map(100000)         :       733142.37 +/- 0.54% op/s
-immutable-map(100000)         :       805468.04 +/- 0.71% op/s
-morearty Data.Map(100000)     :       733479.88 +/- 0.55% op/s
+native(10)                    :      7614908.35 +/- 2.85% op/s
+ht(10)                        :      4376284.55 +/- 3.75% op/s
+hamt(10)                      :      4439778.51 +/- 3.13% op/s
+persistent-hash-trie(10)      :       378023.86 +/- 2.93% op/s
+mori hash_map(10)             :      1790566.28 +/- 3.63% op/s
+immutable-map(10)             :      2179052.43 +/- 3.20% op/s
+morearty Data.Map(10)         :      3816804.84 +/- 5.93% op/s
+native(100)                   :      8906238.62 +/- 3.11% op/s
+ht(100)                       :      2889803.71 +/- 3.36% op/s
+hamt(100)                     :      2812271.31 +/- 3.23% op/s
+persistent-hash-trie(100)     :       123115.87 +/- 2.90% op/s
+mori hash_map(100)            :      1862470.04 +/- 3.14% op/s
+immutable-map(100)            :      1382662.98 +/- 3.60% op/s
+morearty Data.Map(100)        :      2631155.26 +/- 2.78% op/s
+native(1000)                  :     12025883.46 +/- 3.64% op/s
+ht(1000)                      :      2168566.47 +/- 3.31% op/s
+hamt(1000)                    :      2034805.69 +/- 3.35% op/s
+persistent-hash-trie(1000)    :        90461.17 +/- 3.02% op/s
+mori hash_map(1000)           :      1897263.36 +/- 2.89% op/s
+immutable-map(1000)           :      1083268.91 +/- 3.77% op/s
+morearty Data.Map(1000)       :      1738259.73 +/- 3.34% op/s
+native(10000)                 :     11170872.85 +/- 4.13% op/s
+ht(10000)                     :      1619307.54 +/- 2.91% op/s
+hamt(10000)                   :      1878294.78 +/- 6.57% op/s
+persistent-hash-trie(10000)   :        86326.31 +/- 3.56% op/s
+mori hash_map(10000)          :      1910213.28 +/- 3.56% op/s
+immutable-map(10000)          :      1110980.17 +/- 3.07% op/s
+morearty Data.Map(10000)      :      1753720.24 +/- 3.60% op/s
+native(100000)                :     11804359.06 +/- 3.70% op/s
+ht(100000)                    :      1437611.65 +/- 3.82% op/s
+hamt(100000)                  :      1570503.73 +/- 3.91% op/s
+persistent-hash-trie(100000)  :        36467.42 +/- 4.54% op/s
+mori hash_map(100000)         :      1826740.59 +/- 4.00% op/s
+immutable-map(100000)         :       849513.65 +/- 4.08% op/s
+morearty Data.Map(100000)     :      1367268.46 +/- 3.17% op/s
 
 
 Put All
-native(10)                    :      2190081.44 +/- 0.79% op/s
-hashtrie(10)                  :       349676.17 +/- 0.57% op/s
-hamt(10)                      :       310571.66 +/- 1.08% op/s
-persistent-hash-trie(10)      :        54230.66 +/- 0.56% op/s
-mori hash_map(10)             :       135151.06 +/- 0.72% op/s
-immutable-map(10)             :       198376.75 +/- 0.60% op/s
-morearty Data.Map(10)         :       259288.86 +/- 0.89% op/s
-native(100)                   :       233363.49 +/- 0.57% op/s
-hashtrie(100)                 :        21361.46 +/- 0.61% op/s
-hamt(100)                     :        23698.72 +/- 0.65% op/s
-persistent-hash-trie(100)     :         1485.68 +/- 0.48% op/s
-mori hash_map(100)            :         8389.84 +/- 0.84% op/s
-immutable-map(100)            :        15179.94 +/- 0.73% op/s
-morearty Data.Map(100)        :        15649.40 +/- 0.53% op/s
-native(1000)                  :        23383.96 +/- 0.62% op/s
-hashtrie(1000)                :         1626.28 +/- 1.55% op/s
-hamt(1000)                    :         1720.08 +/- 0.61% op/s
-persistent-hash-trie(1000)    :           85.78 +/- 0.53% op/s
-mori hash_map(1000)           :          405.58 +/- 0.75% op/s
-immutable-map(1000)           :         1200.97 +/- 0.61% op/s
-morearty Data.Map(1000)       :         1090.19 +/- 4.40% op/s
-native(10000)                 :         2352.93 +/- 0.51% op/s
-hashtrie(10000)               :          109.08 +/- 0.47% op/s
-hamt(10000)                   :          124.39 +/- 6.26% op/s
-persistent-hash-trie(10000)   :            6.45 +/- 0.71% op/s
-mori hash_map(10000)          :           46.45 +/- 0.90% op/s
-immutable-map(10000)          :           94.13 +/- 1.41% op/s
-morearty Data.Map(10000)      :           87.03 +/- 0.48% op/s
+native(10)                    :       492471.36 +/- 3.55% op/s
+ht(10)                        :       311478.26 +/- 2.69% op/s
+hamt(10)                      :       331788.52 +/- 3.53% op/s
+persistent-hash-trie(10)      :        72546.75 +/- 3.89% op/s
+mori hash_map(10)             :        88254.28 +/- 4.35% op/s
+immutable-map(10)             :       217272.79 +/- 3.64% op/s
+morearty Data.Map(10)         :       328913.54 +/- 2.76% op/s
+native(100)                   :        54870.96 +/- 2.87% op/s
+ht(100)                       :        22909.88 +/- 2.99% op/s
+hamt(100)                     :        26272.84 +/- 3.18% op/s
+persistent-hash-trie(100)     :         1717.74 +/- 2.69% op/s
+mori hash_map(100)            :         9975.53 +/- 3.03% op/s
+immutable-map(100)            :        16814.85 +/- 3.09% op/s
+morearty Data.Map(100)        :        23250.40 +/- 2.95% op/s
+native(1000)                  :         5027.66 +/- 3.82% op/s
+ht(1000)                      :         1774.06 +/- 2.88% op/s
+hamt(1000)                    :         1926.75 +/- 2.96% op/s
+persistent-hash-trie(1000)    :          102.34 +/- 3.51% op/s
+mori hash_map(1000)           :          450.81 +/- 3.32% op/s
+immutable-map(1000)           :         1299.62 +/- 3.36% op/s
+morearty Data.Map(1000)       :         1750.27 +/- 3.26% op/s
+native(10000)                 :          497.10 +/- 5.02% op/s
+ht(10000)                     :          126.90 +/- 4.06% op/s
+hamt(10000)                   :          142.42 +/- 4.22% op/s
+persistent-hash-trie(10000)   :            7.44 +/- 6.44% op/s
+mori hash_map(10000)          :           49.17 +/- 3.55% op/s
+immutable-map(10000)          :          100.18 +/- 4.65% op/s
+morearty Data.Map(10000)      :          139.92 +/- 2.97% op/s
+native(100000)                :           21.32 +/- 22.18% op/s
+ht(100000)                    :            5.05 +/- 16.58% op/s
+hamt(100000)                  :            5.87 +/- 20.11% op/s
+persistent-hash-trie(100000)  :            0.34 +/- 2.56% op/s
+mori hash_map(100000)         :            3.02 +/- 12.05% op/s
+immutable-map(100000)         :            4.55 +/- 16.51% op/s
+morearty Data.Map(100000)     :            5.83 +/- 17.57% op/s
 
 
 remove nth
-native(10)                    :      7235663.19 +/- 0.48% op/s
-hashtrie(10)                  :      2871350.10 +/- 0.68% op/s
-hamt(10)                      :      3087340.80 +/- 0.42% op/s
-persistent-hash-trie(10)      :       169262.57 +/- 0.54% op/s
-mori hash_map(10)             :      1171873.37 +/- 0.46% op/s
-immutable-map(10)             :      1448584.13 +/- 0.82% op/s
-morearty Data.Map(10)         :      1495494.30 +/- 0.49% op/s
-native(100)                   :      7056660.20 +/- 1.01% op/s
-hashtrie(100)                 :      2027546.57 +/- 0.59% op/s
-hamt(100)                     :      2199978.39 +/- 0.56% op/s
-persistent-hash-trie(100)     :        64469.91 +/- 0.52% op/s
-mori hash_map(100)            :      1010774.88 +/- 0.59% op/s
-immutable-map(100)            :      1322749.56 +/- 0.62% op/s
-morearty Data.Map(100)        :      1094000.68 +/- 0.48% op/s
-native(1000)                  :      7032882.17 +/- 0.63% op/s
-hashtrie(1000)                :      1496037.43 +/- 0.65% op/s
-hamt(1000)                    :      1838029.64 +/- 2.00% op/s
-persistent-hash-trie(1000)    :        44031.66 +/- 1.18% op/s
-mori hash_map(1000)           :       453475.48 +/- 9.55% op/s
-immutable-map(1000)           :       993734.74 +/- 0.86% op/s
-morearty Data.Map(1000)       :       889579.10 +/- 0.60% op/s
-native(10000)                 :      7340514.35 +/- 0.67% op/s
-hashtrie(10000)               :      1053591.28 +/- 0.50% op/s
-hamt(10000)                   :      1261330.80 +/- 0.52% op/s
-persistent-hash-trie(10000)   :        36043.94 +/- 0.52% op/s
-mori hash_map(10000)          :       424898.08 +/- 0.62% op/s
-immutable-map(10000)          :       861367.72 +/- 0.51% op/s
-morearty Data.Map(10000)      :       616960.80 +/- 0.65% op/s
-native(100000)                :      4238197.99 +/- 2.34% op/s
-hashtrie(100000)              :       608813.30 +/- 2.32% op/s
-hamt(100000)                  :       721291.29 +/- 0.75% op/s
-persistent-hash-trie(100000)  :        16000.21 +/- 4.56% op/s
-mori hash_map(100000)         :       219066.97 +/- 11.80% op/s
-immutable-map(100000)         :       627187.78 +/- 1.90% op/s
-morearty Data.Map(100000)     :       316767.63 +/- 7.68% op/s
+native(10)                    :     11085782.83 +/- 3.29% op/s
+ht(10)                        :      2617734.67 +/- 5.63% op/s
+hamt(10)                      :      3406146.18 +/- 2.74% op/s
+persistent-hash-trie(10)      :       279174.43 +/- 3.36% op/s
+mori hash_map(10)             :      1455816.93 +/- 3.32% op/s
+immutable-map(10)             :      1671965.56 +/- 3.39% op/s
+morearty Data.Map(10)         :      2586467.57 +/- 3.38% op/s
+native(100)                   :     10345511.58 +/- 3.32% op/s
+ht(100)                       :      1960573.88 +/- 4.78% op/s
+hamt(100)                     :      2185718.89 +/- 3.95% op/s
+persistent-hash-trie(100)     :        81304.02 +/- 2.63% op/s
+mori hash_map(100)            :      1228253.57 +/- 3.49% op/s
+immutable-map(100)            :      1531142.75 +/- 3.22% op/s
+morearty Data.Map(100)        :      1750734.30 +/- 3.22% op/s
+native(1000)                  :     10507391.82 +/- 3.22% op/s
+ht(1000)                      :      1567615.81 +/- 2.93% op/s
+hamt(1000)                    :      2039188.02 +/- 5.07% op/s
+persistent-hash-trie(1000)    :        55985.12 +/- 3.02% op/s
+mori hash_map(1000)           :       663392.99 +/- 3.16% op/s
+immutable-map(1000)           :      1184029.58 +/- 3.51% op/s
+morearty Data.Map(1000)       :      1587504.67 +/- 2.72% op/s
+native(10000)                 :     10190826.62 +/- 3.11% op/s
+ht(10000)                     :      1214312.54 +/- 3.89% op/s
+hamt(10000)                   :      1454276.25 +/- 6.20% op/s
+persistent-hash-trie(10000)   :        44389.60 +/- 3.52% op/s
+mori hash_map(10000)          :       515754.55 +/- 3.64% op/s
+immutable-map(10000)          :       915827.05 +/- 3.57% op/s
+morearty Data.Map(10000)      :      1147404.12 +/- 3.62% op/s
+native(100000)                :      8153242.82 +/- 8.41% op/s
+ht(100000)                    :       644266.74 +/- 7.92% op/s
+hamt(100000)                  :       810310.87 +/- 3.47% op/s
+persistent-hash-trie(100000)  :        19819.05 +/- 3.98% op/s
+mori hash_map(100000)         :       328350.21 +/- 4.11% op/s
+immutable-map(100000)         :       666038.79 +/- 3.28% op/s
+morearty Data.Map(100000)     :       660901.69 +/- 3.66% op/s
 
 
 Remove All
-native(10)                    :       918181.72 +/- 2.49% op/s
-hashtrie(10)                  :       280336.66 +/- 1.75% op/s
-hamt(10)                      :       381341.49 +/- 1.20% op/s
-persistent-hash-trie(10)      :        35110.57 +/- 2.90% op/s
-mori hash_map(10)             :       125966.80 +/- 2.59% op/s
-immutable-map(10)             :       134312.29 +/- 3.44% op/s
-morearty Data.Map(10)         :       159554.62 +/- 1.31% op/s
-native(100)                   :        99255.00 +/- 0.47% op/s
-hashtrie(100)                 :        20994.13 +/- 0.51% op/s
-hamt(100)                     :        28889.94 +/- 1.20% op/s
-persistent-hash-trie(100)     :         2502.62 +/- 1.67% op/s
-mori hash_map(100)            :         9547.52 +/- 0.61% op/s
-immutable-map(100)            :        12594.12 +/- 2.49% op/s
-morearty Data.Map(100)        :        11065.26 +/- 2.95% op/s
-native(1000)                  :        10180.96 +/- 0.81% op/s
-hashtrie(1000)                :         1359.04 +/- 1.89% op/s
-hamt(1000)                    :         1925.97 +/- 2.53% op/s
-persistent-hash-trie(1000)    :         1245.24 +/- 1.95% op/s
-mori hash_map(1000)           :          481.74 +/- 5.09% op/s
-immutable-map(1000)           :         1011.67 +/- 3.45% op/s
-morearty Data.Map(1000)       :          931.73 +/- 0.58% op/s
-native(10000)                 :         1073.85 +/- 0.57% op/s
-hashtrie(10000)               :           95.66 +/- 0.73% op/s
-hamt(10000)                   :          117.98 +/- 0.80% op/s
-persistent-hash-trie(10000)   :          350.93 +/- 0.43% op/s
-mori hash_map(10000)          :           45.75 +/- 0.90% op/s
-immutable-map(10000)          :           80.88 +/- 0.66% op/s
-morearty Data.Map(10000)      :           59.83 +/- 2.55% op/s
+native(10)                    :      1347042.70 +/- 3.62% op/s
+ht(10)                        :       323396.32 +/- 6.01% op/s
+hamt(10)                      :       423105.57 +/- 5.46% op/s
+persistent-hash-trie(10)      :        39971.89 +/- 3.41% op/s
+mori hash_map(10)             :       152436.46 +/- 3.95% op/s
+immutable-map(10)             :       170275.86 +/- 3.45% op/s
+morearty Data.Map(10)         :       276878.75 +/- 3.33% op/s
+native(100)                   :       133016.43 +/- 3.17% op/s
+ht(100)                       :        23978.59 +/- 2.64% op/s
+hamt(100)                     :        30186.89 +/- 3.41% op/s
+persistent-hash-trie(100)     :         3178.07 +/- 2.98% op/s
+mori hash_map(100)            :        11654.98 +/- 2.97% op/s
+immutable-map(100)            :        15426.90 +/- 3.04% op/s
+morearty Data.Map(100)        :        19037.86 +/- 3.31% op/s
+native(1000)                  :        13113.91 +/- 3.61% op/s
+ht(1000)                      :         1798.70 +/- 3.57% op/s
+hamt(1000)                    :         2230.47 +/- 2.90% op/s
+persistent-hash-trie(1000)    :         1470.84 +/- 5.36% op/s
+mori hash_map(1000)           :          632.69 +/- 2.77% op/s
+immutable-map(1000)           :         1205.10 +/- 2.86% op/s
+morearty Data.Map(1000)       :         1754.22 +/- 3.10% op/s
+native(10000)                 :         1339.37 +/- 3.00% op/s
+ht(10000)                     :          122.44 +/- 3.94% op/s
+hamt(10000)                   :          149.91 +/- 5.60% op/s
+persistent-hash-trie(10000)   :          428.48 +/- 3.66% op/s
+mori hash_map(10000)          :           55.76 +/- 3.93% op/s
+immutable-map(10000)          :           92.47 +/- 3.60% op/s
+morearty Data.Map(10000)      :          123.42 +/- 4.16% op/s
+native(100000)                :          109.73 +/- 5.62% op/s
+ht(100000)                    :            5.58 +/- 12.62% op/s
+hamt(100000)                  :            7.62 +/- 8.36% op/s
+persistent-hash-trie(100000)  :           37.78 +/- 4.32% op/s
+mori hash_map(100000)         :            2.75 +/- 19.43% op/s
+immutable-map(100000)         :            6.75 +/- 4.67% op/s
+morearty Data.Map(100000)     :            6.95 +/- 4.34% op/s
 
 
 Count
-native(10)                    :      2489331.23 +/- 2.20% op/s
-hashtrie(10)                  :       454454.29 +/- 1.94% op/s
-hamt(10)                      :     10937720.74 +/- 2.61% op/s
-persistent-hash-trie(10)      :       281199.23 +/- 0.63% op/s
-mori hash_map(10)             :     42845228.20 +/- 1.32% op/s
-immutable-map(10)             :     70420267.69 +/- 1.63% op/s
-morearty Data.Map(10)         :       110122.93 +/- 4.56% op/s
-native(100)                   :       273585.27 +/- 3.27% op/s
-hashtrie(100)                 :        60899.57 +/- 0.67% op/s
-hamt(100)                     :       615393.84 +/- 3.18% op/s
-persistent-hash-trie(100)     :         7209.26 +/- 3.43% op/s
-mori hash_map(100)            :     39709835.83 +/- 1.66% op/s
-immutable-map(100)            :     68142887.78 +/- 1.27% op/s
-morearty Data.Map(100)        :        17392.79 +/- 2.26% op/s
-native(1000)                  :        22097.50 +/- 1.81% op/s
-hashtrie(1000)                :         4208.32 +/- 3.39% op/s
-hamt(1000)                    :        24644.87 +/- 3.30% op/s
-persistent-hash-trie(1000)    :          800.02 +/- 1.69% op/s
-mori hash_map(1000)           :     43199356.04 +/- 1.57% op/s
-immutable-map(1000)           :     67651601.53 +/- 1.24% op/s
-morearty Data.Map(1000)       :         1666.52 +/- 2.81% op/s
-native(10000)                 :         2578.35 +/- 0.45% op/s
-hashtrie(10000)               :          426.22 +/- 0.59% op/s
-hamt(10000)                   :         6309.43 +/- 0.49% op/s
-persistent-hash-trie(10000)   :          167.63 +/- 1.59% op/s
-mori hash_map(10000)          :     41684258.10 +/- 2.06% op/s
-immutable-map(10000)          :     61745519.08 +/- 3.38% op/s
-morearty Data.Map(10000)      :          140.38 +/- 5.20% op/s
+native(10)                    :      7006756.42 +/- 3.46% op/s
+ht(10)                        :       624864.59 +/- 3.27% op/s
+hamt(10)                      :     10377659.94 +/- 2.62% op/s
+persistent-hash-trie(10)      :       340169.37 +/- 3.55% op/s
+mori hash_map(10)             :     48634423.15 +/- 4.07% op/s
+immutable-map(10)             :     75523230.10 +/- 4.83% op/s
+morearty Data.Map(10)         :      4687980.20 +/- 4.01% op/s
+native(100)                   :      6733521.24 +/- 3.04% op/s
+ht(100)                       :        57707.59 +/- 2.86% op/s
+hamt(100)                     :       737359.29 +/- 3.00% op/s
+persistent-hash-trie(100)     :        10704.68 +/- 3.52% op/s
+mori hash_map(100)            :     49508520.45 +/- 3.27% op/s
+immutable-map(100)            :     76704975.63 +/- 2.74% op/s
+morearty Data.Map(100)        :       419152.47 +/- 3.04% op/s
+native(1000)                  :      6672607.79 +/- 3.45% op/s
+ht(1000)                      :         5917.10 +/- 3.50% op/s
+hamt(1000)                    :        31902.66 +/- 3.50% op/s
+persistent-hash-trie(1000)    :         1043.08 +/- 3.90% op/s
+mori hash_map(1000)           :     51633505.80 +/- 3.19% op/s
+immutable-map(1000)           :     80457406.15 +/- 3.69% op/s
+morearty Data.Map(1000)       :        38267.09 +/- 3.18% op/s
+native(10000)                 :      6855522.04 +/- 3.45% op/s
+ht(10000)                     :          549.23 +/- 3.73% op/s
+hamt(10000)                   :         7384.07 +/- 3.10% op/s
+persistent-hash-trie(10000)   :          233.50 +/- 4.35% op/s
+mori hash_map(10000)          :     49839805.61 +/- 3.04% op/s
+immutable-map(10000)          :     81272424.69 +/- 3.34% op/s
+morearty Data.Map(10000)      :         4446.98 +/- 3.16% op/s
+native(100000)                :      6619451.82 +/- 3.05% op/s
+ht(100000)                    :           32.82 +/- 3.65% op/s
+hamt(100000)                  :          120.97 +/- 4.83% op/s
+persistent-hash-trie(100000)  :           30.01 +/- 3.24% op/s
+mori hash_map(100000)         :     50681506.86 +/- 3.99% op/s
+immutable-map(100000)         :     81307032.73 +/- 3.39% op/s
+morearty Data.Map(100000)     :          103.28 +/- 4.10% op/s
 
 
 Sum
-native-for-loop(10)           :      2103433.75 +/- 2.96% op/s
-native-for-in-loop(10)        :       457467.83 +/- 2.37% op/s
-hashtrie(10)                  :       458090.69 +/- 3.57% op/s
-hamt(10)                      :      7096308.48 +/- 3.42% op/s
-persistent-hash-trie(10)      :       303287.15 +/- 4.01% op/s
-mori hash_map(10)             :      1799310.60 +/- 1.43% op/s
-immutable-map(10)             :      7756689.17 +/- 2.92% op/s
-morearty Data.Map(10)         :       110087.53 +/- 5.28% op/s
-native-for-loop(100)          :       318919.37 +/- 0.70% op/s
-native-for-in-loop(100)       :        29205.61 +/- 1.75% op/s
-hashtrie(100)                 :        44563.90 +/- 2.42% op/s
-hamt(100)                     :       520062.92 +/- 1.18% op/s
-persistent-hash-trie(100)     :         7745.86 +/- 0.56% op/s
-mori hash_map(100)            :       183212.15 +/- 0.52% op/s
-immutable-map(100)            :       812640.81 +/- 0.74% op/s
-morearty Data.Map(100)        :        16157.11 +/- 0.78% op/s
-native-for-loop(1000)         :        34751.83 +/- 0.50% op/s
-native-for-in-loop(1000)      :         2742.65 +/- 0.88% op/s
-hashtrie(1000)                :         4711.25 +/- 0.55% op/s
-hamt(1000)                    :        21557.26 +/- 0.38% op/s
-persistent-hash-trie(1000)    :          842.45 +/- 0.87% op/s
-mori hash_map(1000)           :        14350.55 +/- 0.65% op/s
-immutable-map(1000)           :        65345.91 +/- 0.45% op/s
-morearty Data.Map(1000)       :         1698.09 +/- 2.10% op/s
-native-for-loop(10000)        :         4909.91 +/- 0.46% op/s
-native-for-in-loop(10000)     :          271.11 +/- 1.58% op/s
-hashtrie(10000)               :          429.03 +/- 1.18% op/s
-hamt(10000)                   :         4749.54 +/- 1.82% op/s
-persistent-hash-trie(10000)   :          167.76 +/- 1.56% op/s
-mori hash_map(10000)          :         1938.29 +/- 1.03% op/s
-immutable-map(10000)          :         6578.18 +/- 0.51% op/s
-morearty Data.Map(10000)      :          162.42 +/- 1.14% op/s
+native-for-loop(10)           :      3724589.37 +/- 3.11% op/s
+native-for-in-loop(10)        :      6579715.65 +/- 3.24% op/s
+ht(10)                        :       608092.62 +/- 3.00% op/s
+hamt(10)                      :      7534085.94 +/- 3.29% op/s
+persistent-hash-trie(10)      :       328764.79 +/- 3.02% op/s
+mori hash_map(10)             :            0.01 +/- 196.00% op/s
+immutable-map(10)             :      9125686.32 +/- 3.08% op/s
+morearty Data.Map(10)         :      3221447.58 +/- 4.11% op/s
+native-for-loop(100)          :      3546491.26 +/- 3.22% op/s
+native-for-in-loop(100)       :      6557215.70 +/- 3.41% op/s
+ht(100)                       :        56033.30 +/- 3.51% op/s
+hamt(100)                     :       549185.56 +/- 2.78% op/s
+persistent-hash-trie(100)     :         9892.63 +/- 4.02% op/s
+mori hash_map(100)            :       235750.00 +/- 2.92% op/s
+immutable-map(100)            :       893469.24 +/- 3.60% op/s
+morearty Data.Map(100)        :       325639.61 +/- 3.79% op/s
+native-for-loop(1000)         :      3667244.79 +/- 2.72% op/s
+native-for-in-loop(1000)      :      6478359.47 +/- 3.03% op/s
+ht(1000)                      :         5850.57 +/- 3.29% op/s
+hamt(1000)                    :        26628.68 +/- 3.59% op/s
+persistent-hash-trie(1000)    :         1030.98 +/- 3.24% op/s
+mori hash_map(1000)           :        17655.85 +/- 2.69% op/s
+immutable-map(1000)           :        69435.14 +/- 3.18% op/s
+morearty Data.Map(1000)       :        30704.38 +/- 3.53% op/s
+native-for-loop(10000)        :      3712047.79 +/- 2.90% op/s
+native-for-in-loop(10000)     :      6414620.06 +/- 3.12% op/s
+ht(10000)                     :          538.23 +/- 3.60% op/s
+hamt(10000)                   :         5256.26 +/- 3.27% op/s
+persistent-hash-trie(10000)   :          203.62 +/- 4.77% op/s
+mori hash_map(10000)          :         2468.42 +/- 3.58% op/s
+immutable-map(10000)          :         7192.12 +/- 3.67% op/s
+morearty Data.Map(10000)      :         3415.87 +/- 3.60% op/s
+native-for-loop(100000)       :      3490738.80 +/- 3.70% op/s
+native-for-in-loop(100000)    :      6465158.35 +/- 2.96% op/s
+ht(100000)                    :           31.83 +/- 3.90% op/s
+hamt(100000)                  :          109.67 +/- 4.16% op/s
+persistent-hash-trie(100000)  :           26.52 +/- 5.18% op/s
+mori hash_map(100000)         :           65.21 +/- 4.22% op/s
+immutable-map(100000)         :          111.98 +/- 4.07% op/s
+morearty Data.Map(100000)     :           89.17 +/- 3.87% op/s
 
 
 Keys
-native(10)                    :      1401834.32 +/- 1.44% op/s
-hashtrie(10)                  :       474213.73 +/- 0.45% op/s
-hamt(10)                      :      3368704.58 +/- 0.56% op/s
-persistent-hash-trie(10)      :       163766.77 +/- 1.15% op/s
-mori hash_map(10)             :       440950.98 +/- 8.78% op/s
-immutable-map(10)             :      3466545.11 +/- 0.75% op/s
-morearty Data.Map(10)         :       326113.89 +/- 0.60% op/s
-native(100)                   :       232540.73 +/- 0.44% op/s
-hashtrie(100)                 :        59156.36 +/- 1.08% op/s
-hamt(100)                     :       384345.46 +/- 0.56% op/s
-persistent-hash-trie(100)     :         8788.56 +/- 0.56% op/s
-mori hash_map(100)            :        37687.89 +/- 0.49% op/s
-immutable-map(100)            :       382298.47 +/- 1.13% op/s
-morearty Data.Map(100)        :        40223.54 +/- 0.81% op/s
-native(1000)                  :        25193.24 +/- 0.96% op/s
-hashtrie(1000)                :         4509.49 +/- 0.44% op/s
-hamt(1000)                    :        17762.37 +/- 1.18% op/s
-persistent-hash-trie(1000)    :          872.68 +/- 1.11% op/s
-mori hash_map(1000)           :         2916.23 +/- 0.97% op/s
-immutable-map(1000)           :        36456.95 +/- 0.41% op/s
-morearty Data.Map(1000)       :         3300.36 +/- 0.68% op/s
-native(10000)                 :         2568.93 +/- 0.52% op/s
-hashtrie(10000)               :          400.38 +/- 2.28% op/s
-hamt(10000)                   :         3728.99 +/- 0.46% op/s
-persistent-hash-trie(10000)   :          175.58 +/- 0.84% op/s
-mori hash_map(10000)          :          250.91 +/- 0.50% op/s
-immutable-map(10000)          :         4072.13 +/- 1.05% op/s
-morearty Data.Map(10000)      :          313.67 +/- 0.59% op/s
+native(10)                    :      7010288.94 +/- 2.98% op/s
+ht(10)                        :       574143.97 +/- 3.29% op/s
+hamt(10)                      :      4225974.76 +/- 3.36% op/s
+persistent-hash-trie(10)      :       333930.00 +/- 3.48% op/s
+mori hash_map(10)             :       414655.15 +/- 3.03% op/s
+immutable-map(10)             :      3892116.88 +/- 3.70% op/s
+morearty Data.Map(10)         :      3232622.60 +/- 4.06% op/s
+native(100)                   :      7024720.40 +/- 2.88% op/s
+ht(100)                       :        52784.84 +/- 3.38% op/s
+hamt(100)                     :       453350.28 +/- 2.94% op/s
+persistent-hash-trie(100)     :        10538.36 +/- 3.41% op/s
+mori hash_map(100)            :        38974.93 +/- 2.96% op/s
+immutable-map(100)            :       440996.39 +/- 2.80% op/s
+morearty Data.Map(100)        :       361338.97 +/- 4.24% op/s
+native(1000)                  :      6997880.26 +/- 3.09% op/s
+ht(1000)                      :         5554.47 +/- 2.75% op/s
+hamt(1000)                    :        23089.25 +/- 2.66% op/s
+persistent-hash-trie(1000)    :         1077.99 +/- 3.15% op/s
+mori hash_map(1000)           :         3186.92 +/- 2.89% op/s
+immutable-map(1000)           :        39327.83 +/- 3.62% op/s
+morearty Data.Map(1000)       :        36244.96 +/- 3.29% op/s
+native(10000)                 :      6663960.11 +/- 4.03% op/s
+ht(10000)                     :          484.52 +/- 4.40% op/s
+hamt(10000)                   :         4004.35 +/- 3.44% op/s
+persistent-hash-trie(10000)   :          207.15 +/- 5.11% op/s
+mori hash_map(10000)          :          237.05 +/- 5.97% op/s
+immutable-map(10000)          :         4530.55 +/- 3.68% op/s
+morearty Data.Map(10000)      :         3984.15 +/- 3.55% op/s
+native(100000)                :      6977602.59 +/- 3.39% op/s
+ht(100000)                    :           28.77 +/- 9.85% op/s
+hamt(100000)                  :           96.20 +/- 4.20% op/s
+persistent-hash-trie(100000)  :           28.98 +/- 3.57% op/s
+mori hash_map(100000)         :           17.79 +/- 9.46% op/s
+immutable-map(100000)         :           78.66 +/- 4.07% op/s
+morearty Data.Map(100000)     :           83.50 +/- 10.12% op/s
 ```
 
 [hashtrie]: https://github.com/mattbierner/hashtrie
